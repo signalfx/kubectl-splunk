@@ -12,18 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package cli
 
 import (
 	"log"
 
-	"github.com/signalfx/kubectl-signalfx/pkg/cli"
-
+	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"
 )
 
 func main() {
-	err := doc.GenMarkdownTree(cli.RootCmd, "docs")
+	cmd := &cobra.Command{
+		Use:   "test",
+		Short: "my test program",
+	}
+	err := doc.GenMarkdownTree(cmd, "docs")
 	if err != nil {
 		log.Fatal(err)
 	}

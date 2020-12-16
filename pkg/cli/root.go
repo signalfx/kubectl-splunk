@@ -1,36 +1,39 @@
-/*
-Copyright © 2019 Splunk Inc.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+// Copyright 2020 Splunk, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package cli
 
 import (
 	"fmt"
-	"github.com/signalfx/kubectl-signalfx/pkg/kubectl"
-	"github.com/spf13/cobra"
 	"os"
 
-	homedir "github.com/mitchellh/go-homedir"
+	"github.com/spf13/cobra"
+
+	"github.com/signalfx/kubectl-signalfx/pkg/kubectl"
+
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
 )
 
-var cfgFile string
+var (
+	cfgFile  string
+	Selector = "app=o11y-collector"
+)
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "kubectl-signalfx",
-	Short: "Wrapper around kubectl for managing SignalFx Smart Agent",
+	Short: "Wrapper around kubectl for managing OpenTelemetry Collector",
 	Long: `A longer description that spans multiple lines and likely contains
 examples and usage of using your application. For example:
 
@@ -56,7 +59,8 @@ func init() {
 	// will be global for your application.
 
 	RootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.kubectl-signalfx.yaml)")
-	kubectl.KubectlCfgFlags.AddFlags(RootCmd.PersistentFlags())
+	RootCmd.PersistentFlags().StringVar(&Selector, "selector", Selector, "Common selector used to locate collector resources")
+	kubectl.CfgFlags.AddFlags(RootCmd.PersistentFlags())
 }
 
 // initConfig reads in config file and ENV variables if set.

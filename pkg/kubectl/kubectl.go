@@ -1,17 +1,17 @@
-/*
-Copyright 2019 The Kubernetes Authors.
-Copyright 2019 Splunk Inc.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    http://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+// Copyright 2019 The Kubernetes Authors.
+// Modifications Copyright 2020 Splunk, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package kubectl
 
@@ -19,16 +19,17 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"k8s.io/cli-runtime/pkg/genericclioptions"
 	"os"
 	"os/exec"
 	"strings"
 	"syscall"
 
+	"k8s.io/cli-runtime/pkg/genericclioptions"
+
 	apiv1 "k8s.io/api/core/v1"
 )
 
-var KubectlCfgFlags = genericclioptions.NewConfigFlags(false)
+var CfgFlags = genericclioptions.NewConfigFlags(false)
 
 // PodExecString takes a pod and a command, uses kubectl exec to run the command in the pod
 // and returns stdout as a string
@@ -39,7 +40,7 @@ func PodExecString(pod *apiv1.Pod, args []string) (string, error) {
 
 // ExecToString runs a kubectl subcommand and returns stdout as a string
 func ExecToString(args []string) (string, error) {
-	kArgs := getKubectlConfigFlags(KubectlCfgFlags)
+	kArgs := getKubectlConfigFlags(CfgFlags)
 	kArgs = append(kArgs, args...)
 
 	buf := bytes.NewBuffer(make([]byte, 0))
@@ -52,14 +53,14 @@ func ExecToString(args []string) (string, error) {
 
 // Exec replaces the current process with a kubectl invocation
 func Exec(args []string) error {
-	kArgs := append(getKubectlConfigFlags(KubectlCfgFlags), args...)
+	kArgs := append(getKubectlConfigFlags(CfgFlags), args...)
 	fmt.Println("running: ", kArgs)
 	return execCommand(append([]string{"kubectl"}, kArgs...))
 }
 
 // Spawn the command and wait for completion
 func Spawn(args []string) error {
-	kArgs := append(getKubectlConfigFlags(KubectlCfgFlags), args...)
+	kArgs := append(getKubectlConfigFlags(CfgFlags), args...)
 	fmt.Println("running: ", kArgs)
 	cmd := exec.Command("kubectl", kArgs...)
 	cmd.Stdout = os.Stdout
