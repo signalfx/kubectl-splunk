@@ -1,32 +1,17 @@
 # kubectl-signalfx
-A kubectl plugin for interacting with signalfx-agent deployments
 
+A kubectl plugin for interacting with o11y-collector deployments. It can query collector pods, daemonsets, etc. with a query selector already set (`--selector app=o11y-collector`). The [support](./docs/kubectl-signalfx_support.md) command can be used to gather all relevant spec files (excluding secrets) as well as the pod log files.
+
+Status: beta
 
 ## Installation
-Clone this repository and copy the `kubectl-signalfx` binary to `/usr/local/bin`
-1. `git clone https://github.com/signalfx/kubectl-signalfx-agent.git`
-2. `chmod +x kubectl-signalfx`
-3. `cp kubectl-signalfx /usr/local/bin`
+
+Download the [latest release](https://github.com/signalfx/kubectl-signalfx/releases) and copy the `kubectl-signalfx` binary to `/usr/local/bin` or somewhere in your `$PATH`.
 
 ## Usage
-```bash
 
-kubectl-signalfx [ support | status | config | logs | endpoints | configmap ]
-   pods:        Display status of $AGENT pods, 
-                this is the default command when none is passed.
-   support:     Zip up the configmap, logs, status, and resolved config.
-   status:      print the $AGENT statuses.
-   config:      print the $AGENT resolved config.
-   configmap:   print the $AGENT config map.
-   endpoints:   print the endpoints discovered by the $AGENT.
-   logs:        print the $AGENT logs.
-
-   Optional args:
-
-   (-p|--pod)=signalfx-agent-pod-name. If no pod is passed, all
-              $AGENT pods are used.
-```
-
+See [docs](docs/kubectl-signalfx.md).
 
 ## License
+
 [Apache 2.0](./LICENSE)
