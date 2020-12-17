@@ -54,14 +54,14 @@ func ExecToString(args []string) (string, error) {
 // Exec replaces the current process with a kubectl invocation
 func Exec(args []string) error {
 	kArgs := append(getKubectlConfigFlags(CfgFlags), args...)
-	fmt.Println("running: ", kArgs)
+	// fmt.Println("running: ", kArgs)
 	return execCommand(append([]string{"kubectl"}, kArgs...))
 }
 
 // Spawn the command and wait for completion
 func Spawn(args []string) error {
 	kArgs := append(getKubectlConfigFlags(CfgFlags), args...)
-	fmt.Println("running: ", kArgs)
+	// fmt.Println("running: ", kArgs)
 	cmd := exec.Command("kubectl", kArgs...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

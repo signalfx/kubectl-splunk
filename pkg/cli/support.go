@@ -95,7 +95,6 @@ func logs(z *zip.Writer) error {
 			}
 
 			for ref, wrapper := range res {
-				println(ref.Name)
 				log, err := wrapper.DoRaw(context.Background())
 				if err != nil {
 					return err
