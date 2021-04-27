@@ -32,7 +32,7 @@ import (
 	"k8s.io/client-go/kubernetes/scheme"
 	"k8s.io/kubectl/pkg/polymorphichelpers"
 
-	"github.com/signalfx/kubectl-signalfx/pkg/kubectl"
+	"github.com/signalfx/kubectl-splunk/pkg/kubectl"
 )
 
 const supportFile = "signalfx-support.zip"

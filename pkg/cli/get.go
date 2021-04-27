@@ -18,7 +18,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/signalfx/kubectl-signalfx/pkg/kubectl"
+	"github.com/signalfx/kubectl-splunk/pkg/kubectl"
 )
 
 // getCmd represents the get command

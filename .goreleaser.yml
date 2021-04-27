@@ -14,7 +14,7 @@ builds:
       - linux
       - windows
       - darwin
-    main: ./cmd/kubectl-signalfx
+    main: ./cmd/kubectl-splunk
 archives:
   - replacements:
       darwin: Darwin
