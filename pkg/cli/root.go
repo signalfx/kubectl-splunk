@@ -19,7 +19,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/signalfx/kubectl-signalfx/pkg/kubectl"
+	"github.com/signalfx/kubectl-splunk/pkg/kubectl"
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
@@ -27,12 +27,12 @@ import (
 
 var (
 	cfgFile  string
-	Selector = "app=o11y-collector"
+	Selector = "app=splunk-otel-collector"
 )
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:   "kubectl-signalfx",
+	Use:   "kubectl-splunk",
 	Short: "Wrapper around kubectl for managing OpenTelemetry Collector",
 	Long: `A longer description that spans multiple lines and likely contains
 examples and usage of using your application. For example:
@@ -58,7 +58,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
-	RootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.kubectl-signalfx.yaml)")
+	RootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.kubectl-splunk.yaml)")
 	RootCmd.PersistentFlags().StringVar(&Selector, "selector", Selector, "Common selector used to locate collector resources")
 	kubectl.CfgFlags.AddFlags(RootCmd.PersistentFlags())
 }
@@ -76,9 +76,9 @@ func initConfig() {
 			os.Exit(1)
 		}
 
-		// Search config in home directory with name ".kubectl-signalfx" (without extension).
+		// Search config in home directory with name ".kubectl-splunk" (without extension).
 		viper.AddConfigPath(home)
-		viper.SetConfigName(".kubectl-signalfx")
+		viper.SetConfigName(".kubectl-splunk")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match
