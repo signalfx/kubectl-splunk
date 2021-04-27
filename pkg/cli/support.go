@@ -38,8 +38,8 @@ import (
 const supportFile = "signalfx-support.zip"
 
 var (
-	accessor               = meta.NewAccessor()
-	apiResources           = []string{"pods", "daemonsets", "configmaps", "clusterroles", "clusterrolebindings", "serviceaccounts"}
+	accessor     = meta.NewAccessor()
+	apiResources = []string{"pods", "daemonsets", "configmaps", "clusterroles", "clusterrolebindings", "serviceaccounts"}
 	// From https://github.com/kubernetes/kubectl/blob/master/pkg/cmd/logs/logs.go
 	containerNameFromRefSpecRegexp = regexp.MustCompile(`spec\.(?:initContainers|containers|ephemeralContainers){(.+)}`)
 )
