@@ -16,6 +16,10 @@ to `/usr/local/bin` or somewhere in your `$PATH`.
 
 See [docs](docs/kubectl-splunk.md).
 
+## Contributing
+
+When updating dependencies run `make license` to regenerate `NOTIFICATIONS` file.
+
 ## License
 
 [Apache 2.0](./LICENSE)
