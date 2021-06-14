@@ -20,6 +20,8 @@ See [docs](docs/kubectl-splunk.md).
 
 When updating dependencies run `make license` to regenerate `NOTIFICATIONS` file.
 
+Submission of an executed [Splunk Contributor License Agreement](https://www.splunk.com/en_us/form/contributions.html) is a prerequisite of contributing to kubectl-splunk. 
+
 ## License
 
 [Apache 2.0](./LICENSE)
