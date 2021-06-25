@@ -29,12 +29,6 @@ var all bool
 var statusCmd = &cobra.Command{
 	Use:   "status",
 	Short: "Runs the status command in the specified pod.",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
 	Args: func(cmd *cobra.Command, args []string) error {
 		if all {
 			return errors.New("--all is unimplemented")
@@ -57,5 +51,6 @@ to quickly create a Cobra application.`,
 func init() {
 	statusCmd.Flags().StringVarP(&pod, "pod", "p", "", "agent pod name")
 	statusCmd.Flags().BoolVarP(&all, "all", "a", false, "run command on all agent pods")
-	RootCmd.AddCommand(statusCmd)
+	// XXX: Disabled, status command not available in OT.
+	//RootCmd.AddCommand(statusCmd)
 }
