@@ -7,7 +7,7 @@ stages:
 .go-cache:
   image: docker.repo.splunkdev.net/ci-cd/ci-container:golang-1.16
   variables:
-    GOPATH: $CI_PROJECT_DIR/.go
+    GOPATH: $HOME/.go
   before_script:
     - mkdir -p $GOPATH
     - go install github.com/goreleaser/goreleaser@v0.174.1
@@ -15,16 +15,14 @@ stages:
   cache:
     key: go-cache
     paths:
-      - .go/pkg/mod
-      - .go/bin
+      - $HOME/.go/pkg/mod
+      - $HOME/.go/bin
 
 release:
   extends: .go-cache
   only:
-    variables:
-      - $CI_COMMIT_BRANCH == "main"
-      - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+.*/
-  stage: build
+    - tags
+  stage: release
   script: goreleaser release
   artifacts:
     paths:
