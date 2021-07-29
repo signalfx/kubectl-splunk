@@ -4,6 +4,7 @@ before:
   hooks:
     # You may remove this if you don't use go modules.
     - go mod download
+
 builds:
   - env:
       - CGO_ENABLED=0
@@ -15,6 +16,7 @@ builds:
       - windows
       - darwin
     main: ./cmd/kubectl-splunk
+
 archives:
   - replacements:
       darwin: Darwin
@@ -22,10 +24,30 @@ archives:
       windows: Windows
       386: i386
       amd64: x86_64
+
 checksum:
   name_template: checksums.txt
+
 snapshot:
   name_template: "{{ .Tag }}-next"
+
+release:
+  # Repo in which the release will be created.
+  # Default is extracted from the origin remote URL or empty if its private hosted.
+  github:
+    owner: signalfx
+    name: kubectl-splunk
+
+  # If set to true, will not auto-publish the release.
+  # Default is false.
+  draft: true
+
+  # If set to auto, will mark the release as not ready for production
+  # in case there is an indicator for this in the tag e.g. v1.0.0-rc1
+  # If set to true, will mark the release as not ready for production.
+  # Default is false.
+  prerelease: auto
+
 changelog:
   sort: asc
   filters:
