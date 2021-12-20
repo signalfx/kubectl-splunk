@@ -1,3 +1,5 @@
+>ℹ️&nbsp;&nbsp;SignalFx was acquired by Splunk in October 2019. See [Splunk SignalFx](https://www.splunk.com/en_us/investor-relations/acquisitions/signalfx.html) for more information.
+
 # kubectl-splunk
 
 A kubectl plugin for interacting with splunk-otel-collector deployments. It can query collector pods, daemonsets, etc.
