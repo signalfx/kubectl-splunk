@@ -12,3 +12,6 @@ require (
 	k8s.io/client-go v0.20.0
 	k8s.io/kubectl v0.20.0
 )
+
+// security updates
+replace github.com/gogo/protobuf => github.com/gogo/protobuf v1.3.2
